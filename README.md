@@ -37,4 +37,20 @@ https://user-images.githubusercontent.com/48917098/204674328-2a990dae-6be5-49de-
   ### 2.2 Target-Aware Representation for Transformer
   - Permutation LM(PLM)은 아래와 같은 문제점이 발생할 수 있기 때문에 이 문제를 해결하기 위한 방법을 제시.
   ![image](https://user-images.githubusercontent.com/48917098/204673901-1f48c4a3-e39b-4d98-a44d-0c32c8c3bea0.png)
+  - 이 문제점을 해결하기 위해 이전 context 토큰들의 정보(x_(z<t))뿐만 아니라 target index의 position 정보(z_t)도 함께 이용.
+  ![image](https://user-images.githubusercontent.com/48917098/204674925-5e759cfc-60d7-4549-86b6-deaf6770efd0.png)
+  
+  ### 2.3 Two-Stream Self-Attention for Target Aware Representation
+  - target position 정보를 추가적으로 이용하기 위한 g의 조건은 다음과 같다.
+  <img width="658" alt="image" src="https://user-images.githubusercontent.com/48917098/204675095-4841390b-81d5-470a-934b-803c89bde1d4.png">
+  - 위의 두가지 조건을 만족하기 위해 토큰 1개 당 1개의 representation만을 갖는 standard transformer 구조가 아닌, 2개의 hidden representation을 이용하는 변형된 transformer 구조를 제안.
+    #### 1. Query Representation
+    - 이전 시점 token들의 content와 현재 시점의 위치 정보를 이용하여 계산되는 representation.
+    ![image](https://user-images.githubusercontent.com/48917098/204675654-b27dce43-f1d9-4430-a3fb-a855e7e5be4a.png)
+
+    #### 2. Context Representation
+    - 현재 시점 및 이전 시점 token들의 content를 이용하여 계산되는 representation.
+    - standard transformer의 hidden state와 동일한 역할.
+    ![image](https://user-images.githubusercontent.com/48917098/204675837-11502157-26d4-439e-b7ab-abb1708d46c1.png)
+
 
