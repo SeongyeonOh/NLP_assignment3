@@ -82,6 +82,10 @@ https://user-images.githubusercontent.com/48917098/204674328-2a990dae-6be5-49de-
  
  ### 3.2 Segment Recurrence Mechanism
  - 긴 문장에 대해서 여러 segment로 분리하고 이에 대해서 recurrent하게 모델링.
- - Segment-level recurrence를 
+ - Segment-level recurrence를 XLNet에 적용하기 위해서 2가지 포인트에 주목.
+  - 어떻게 permutation setting에 recurrence를 적용할 것인지 => 긴 문장을 2가지 segment로 나눠서 하나의 segment에 대한 처리를 완료 후 각 layer m으로부터 얻어진 content representation을 caching함.
+  - 다른 segment에 대한 계산은 아래의 수식과 같이 나타냄.
+  ![image](https://user-images.githubusercontent.com/48917098/204689734-582e7a5f-21a6-4996-9b29-4348cd8a5fee.png)
+  - 이를 통해 과거 segment에 대한 factorization order를 고려하지 않고 memory의 caching과 reusing이 가능.
 
 
