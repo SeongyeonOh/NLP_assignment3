@@ -69,10 +69,19 @@ https://user-images.githubusercontent.com/48917098/204674328-2a990dae-6be5-49de-
   - Transformer는 input에 절대적 위치에 대한 representation(absolute positional encoding)을 추가하는 방식으로 순서에 대한 모델링이 가능.
   - 이런 transformer의 방식은 하나의 segment 내에서는 위치에 대한 의미를 표현할 수 있으나, 길이가 긴 문장에서 multiple segment에 대해 recurrent 모델링을 할 때 문제가 발생.
   <img width="221" alt="image" src="https://user-images.githubusercontent.com/48917098/204680095-08350a0d-ddde-4267-9246-815c12998988.png">
-    - 위 수식을 보면 두개의 다른 순서의 h인데 +U_(1:L)이 동일.
-    - 이러면 
+    - 위 수식을 보면 두개의 다른 순서의 h인데 +U_(1:L)이 동일. (E는 word embedding)
+    - 이러면 모델이 τ번째 segment의 첫 번째 단어와 τ+1번째 segment의 첫 번째 단어를 위치 상으로 같다고 인식할 수 있는 문제가 발생.
   - 이런 transformer의 방식은 하나의 segment 내에서는 위치에 대한 의미를 표현할 수 있으나, 길이가 긴 문장에서 multiple segment에 대해 recurrent 모델링을 할 때 문제가 발생.
   - 이런 multiple segments에서 발생하는 문제를 해결하기 위해 input-level이 아닌 self-attention mechanism에서 relative positional encoding을 제안해 단어 간의 상대적 위치 정보를 모델링에 사용.
-
+![image](https://user-images.githubusercontent.com/48917098/204680558-b18076d2-8601-4455-b0d8-212a875f7ff1.png)
+ - 아래가 Relative Positional Encoding을 적용한 Self-attention에서 attention score를 구하는 식.
+ - (a)는 content 기반의 처리.
+ - (b)는 content에 의존한 positional bias를 잡아냄.
+ - (c)는 global content bias를 인코딩.
+ - (d)는 global positional bias를 인코딩.
+ 
+ ### 3.2 Segment Recurrence Mechanism
+ - 긴 문장에 대해서 여러 segment로 분리하고 이에 대해서 recurrent하게 모델링.
+ - Segment-level recurrence를 
 
 
