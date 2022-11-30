@@ -56,9 +56,23 @@ https://user-images.githubusercontent.com/48917098/204674328-2a990dae-6be5-49de-
     - standard transformer의 hidden state와 동일한 역할.
 ![Untitled 7](https://user-images.githubusercontent.com/48917098/204676377-825eaf82-bdcd-4662-b9e8-be8026f5d35d.png)
 
+  - 위에 소개된 objective는 permutation을 이용해 가능한 모든 조합의 순서로 maximum likelihood를 수행하는데 이는 학습 시에 굉장히 속도가 느림.
+  - 이를 극복하기 위해, 특정 순서에서 마지막 몇 개의 예측만 이용하는 방법을 사용.
+  ex) 3-2-4-1 순서로 예측한다고 가정하면 아래처럼 마지막 2개만 예측에 이용.
+  <img width="624" alt="image" src="https://user-images.githubusercontent.com/48917098/204679220-99f0a278-9644-4975-b8e4-d08aa4cc5bcc.png">
+
 
   ## 3. Incorporationg Ideas from Transformer-XL
+  - 긴 문장에 대한 처리를 위해 Transformer-XL에서 사용된 2가지 테크닉을 차용.
   
+  ### 3.1 Relative Positional Encoding
+  - Transformer는 input에 절대적 위치에 대한 representation(absolute positional encoding)을 추가하는 방식으로 순서에 대한 모델링이 가능.
+  - 이런 transformer의 방식은 하나의 segment 내에서는 위치에 대한 의미를 표현할 수 있으나, 길이가 긴 문장에서 multiple segment에 대해 recurrent 모델링을 할 때 문제가 발생.
+  <img width="221" alt="image" src="https://user-images.githubusercontent.com/48917098/204680095-08350a0d-ddde-4267-9246-815c12998988.png">
+    - 위 수식을 보면 두개의 다른 순서의 h인데 +U_(1:L)이 동일.
+    - 이러면 
+  - 이런 transformer의 방식은 하나의 segment 내에서는 위치에 대한 의미를 표현할 수 있으나, 길이가 긴 문장에서 multiple segment에 대해 recurrent 모델링을 할 때 문제가 발생.
+  - 이런 multiple segments에서 발생하는 문제를 해결하기 위해 input-level이 아닌 self-attention mechanism에서 relative positional encoding을 제안해 단어 간의 상대적 위치 정보를 모델링에 사용.
 
 
 
